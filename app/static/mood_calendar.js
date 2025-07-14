@@ -38,11 +38,12 @@ async function updateMonth(state) {
     document.querySelector('.jour').innerHTML = "";
 
     const dayElements = [];
-    const moodPromises = [];
+    const moodPromises = []
+    moodPromises.push(getMoodForDay(firstDayOfMonth));
+
 
     for (let i = 0; i <= 41; i++) {
         const DAY_ELEMENT = document.createElement('div');
-        const currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
         const fullDate = new Date(today.getFullYear(), today.getMonth(), i - firstWeekdayIndex + 1);
         fullDate.setHours(0, 0, 0, 0);
 
@@ -64,20 +65,28 @@ async function updateMonth(state) {
 
             // Collect mood request and element
             dayElements.push(DAY_ELEMENT);
-            moodPromises.push(getMoodForDay(fullDate));
+            ;
         }
 
         document.querySelector('.jour').appendChild(DAY_ELEMENT);
     }
 
 
+
+
     // Once all moods are loaded, update elements
     const moodResults = await Promise.all(moodPromises);
+
+    console.log(moodResults)
     moodResults.forEach((mood, idx) => {
-        const el = dayElements[idx];
+        const date = mood[idx].date.split(" ")[0]
+        const element_date = date.split("-")[2]
+        const el = dayElements[element_date - 1];
+        const mood_per_day = mood[idx].mood
+
 
         if (mood) {
-            el.style.backgroundImage = `url('/static/images/${mood}.png')`;
+            el.style.backgroundImage = `url('/static/images/${mood_per_day}.png')`;
             el.style.backgroundSize = 'contain';
             el.style.backgroundPosition = 'center';
             el.style.backgroundRepeat = 'no-repeat';
@@ -87,12 +96,15 @@ async function updateMonth(state) {
 
 async function getMoodForDay(day) {
     const formattedDate = day.toISOString().split('T')[0];
+    const month = formattedDate.split('-')[1];
+    const year = formattedDate.split('-')[0];
     try {
-        const response = await fetch(`/api/current_mood?date=${formattedDate}`);
+        const response = await fetch(`/api/current_mood?month=${month}&year=${year}`);
         const data = await response.json();
-        return data.mood;
+        return data
     } catch (error) {
         console.error('Error fetching mood:', error);
         return null;
     }
 }
+
