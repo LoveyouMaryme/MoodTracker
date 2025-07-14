@@ -50,22 +50,39 @@ def get_mood_list():
 
 
 @app.route("/api/current_mood")
-def get_currentDay_mood():
-    date = request.args.get('date')
-    if not date:
-        return jsonify({"error": "Date parameter is required"}), 400
+def get_all_moods_of_Month():
+    month  = request.args.get('month')
+    year = request.args.get('year')
+    if not month or not year:
+        return jsonify({"error": "Month or Year parameters are missing"}), 400
     
-   
-    #This function retrieves the last mood recorded for a specific date.
-    currentMood = db.session.execute(
-        db.select(Mood).where(func.date(Mood.date) == date).order_by(Mood.date.desc()).limit(1)).scalars().first()
-    
-    print(currentMood)
 
-    if currentMood:
-        return jsonify({
-            "mood": currentMood.mood,
-            "date": currentMood.date.strftime('%Y-%m-%d')
-        })
+
+    #Get the last mood of the day
+    ranked_moods = db.session.query(
+        Mood,
+        func.rank().over(
+            partition_by=func.date(Mood.date),
+            order_by=Mood.date.desc()
+        ).label('rnk')
+    ).filter(
+        func.extract('month', Mood.date) == int(month),
+        func.extract('year', Mood.date) == int(year)
+    ).subquery()
+
+    # 
+    monthMood = db.session.query(ranked_moods).filter(ranked_moods.c.rnk == 1).order_by(ranked_moods.c.date.desc()).all()
+
+    print(monthMood)
+    
+    mood_list = [
+        {
+            "mood": mood.mood,
+            "date": mood.date.strftime('%Y-%m-%d %H:%m:%s')
+        } for mood in monthMood
+    ] 
+
+    if mood_list:
+        return jsonify(mood_list)
     else:
         return jsonify({"mood": None, "date": None})
