@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %} Mood Calendar {% endblock %}
+
+{% block css_file %}
+<link rel="stylesheet" href="{{ url_for('static', filename='mood_calendar.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="calendar">
+        <div class="month-header">
+            <div class="arrow-previous">
+                {
+            </div>
+            <div class="month">
+                July 2025
+            </div>
+            <div class="arrow-next">
+                }
+            </div>
+        </div>
+        <div class="day-body">
+            <div class="weekdays">
+                <div data-short="Sun" data-long="Sunday" class="day">Sunday</div>
+                <div data-short="Mon" data-long="Monday" class="day">Monday</div>
+                <div data-short="Tue" data-long="Tuesday" class="day">Tuesday</div>
+                <div data-short="Wed" data-long="Wednesday" class="day">Wednesday</div>
+                <div data-short="Thu" data-long="Thursday" class="day">Thursday</div>
+                <div data-short="Fri" data-long="Friday" class="day">Friday</div>
+                <div data-short="Sat" data-long="Saturday" class="day">Saturday</div>
+            </div>
+            <div class="jour">
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='mood_calendar.js') }}"></script>
+{% endblock %}

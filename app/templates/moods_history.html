@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %} Mood List {% endblock %}
+
+{% block content %}
+{{ mood_list|length }} moods recorded.
+<ul>
+    {% for mood in mood_list %}
+    <li>{{ mood.mood }} on {{ mood.date.strftime('%Y-%m-%d %H:%M:%S') }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

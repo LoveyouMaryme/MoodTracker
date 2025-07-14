@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %} Mood Response {% endblock %}
+
+
+
+{% block content %}
+<h1>Thank you for sharing your mood!</h1>
+<p>Your mood today is: {{ mood }}
+    <button>
+        <a href="{{ url_for('index') }}">Home Page</a>
+    </button>
+    <button>
+        <a href="{{ url_for('show_mood_calendar')}}">Look at your Mood Calendar</a>
+    </button>
+    <button>
+        <a href="{{ url_for('get_mood_list')}}">View Mood History</a>
+    </button>
+</p>
+{% endblock %}

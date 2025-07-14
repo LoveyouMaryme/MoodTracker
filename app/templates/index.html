@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %} Mood Calendar {% endblock %}
+
+{% block css_file %}
+<link rel="stylesheet" href="{{ url_for('static', filename='index_style.css') }}">
+{% endblock %}
+
+
+
+{% block content %}
+<h1>How do you feel today {{name}}?</h1>
+<form action="{{ url_for('index')}}" name='pick-mood' method="POST">
+    <div class="mood-options">
+        <label class="mood-option">
+            <input type="radio" name="mood" value="happy" required>
+            <img src="{{ url_for('static', filename='images/57623-milk-inlove.png') }}" alt="Happy">
+        </label>
+        <label class="mood-option">
+            <input type="radio" name="mood" value="neutral" required>
+            <img src="{{ url_for('static', filename='images/18636-milk-bored.png') }}" alt="Neutral">
+        </label>
+        <label class="mood-option">
+            <input type="radio" name="mood" value="sad" required>
+            <img src="{{ url_for('static', filename='images/41528-milk-sad.png') }}" alt="Sad">
+        </label>
+
+    </div>
+    <div class="button-container">
+        <button type="submit" id="submit-button">Submit</button>
+        <button type="submit" formaction="{{ url_for('show_mood_calendar')}}" formmethod="get" formnovalidate
+            id="view-history-button">
+            View History
+        </button>
+
+    </div>
+
+
+</form>
+{% endblock %}

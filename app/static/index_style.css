@@ -1,0 +1,142 @@
+:root {
+    --happy-img: url('../static/images/happy.png');
+    --sad-img: url('../static/images/sad.png');
+    --neutral-img: url('../static/images/neutral.png');
+
+
+
+    --rose-beige: #eddcd2;
+    --peach-cream: #fff1e6;
+    --blush-pink: #fde2e4;
+    --rose-petal: #fad2e1;
+    --mint-pale: #c5dedd;
+
+    --mint-soft: #dbe7e4;
+    --eggshell: #f0efeb;
+    --powder-blue: #d6e2e9;
+    --sky-blue: #bcd4e6;
+    --blueberry: #99c1de;
+    --warm-cocoa: #7a2a3b;
+
+    --bg-color: var(--blush-pink);
+    --button-bg: var(--peach-cream);
+    --button-border: var(--rose-beige);
+    --button-text: var(--warm-cocoa);
+    --button-hover: var(--rose-petal);
+
+}
+
+* {
+    font-family: 'Sour Gummy', sans-serif;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--bg-color);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+h1 {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
+
+form {
+    margin-top: 4rem;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+img {
+    cursor: pointer;
+}
+
+img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+
+}
+
+@keyframes bump {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+input[type="radio"]:checked+img {
+    transform: scale(1.2);
+    animation: bump 0.3s ease;
+}
+
+img:not(:hover) {
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.mood-options {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+button {
+    border-radius: 2rem;
+    background-color: var(--button-bg);
+    border: 0.05rem solid var(--button-border);
+    color: var(--button-text);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+
+button:hover {
+    background-color: var(--warm-cocoa);
+    color: var(--button-bg);
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .mood-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
