@@ -1,0 +1,112 @@
+:root {
+    --rose-beige: #eddcd2;
+    --peach-cream: #fff1e6;
+    --blush-pink: #fde2e4;
+    --rose-petal: #fad2e1;
+    --mint-pale: #c5dedd;
+
+    --mint-soft: #dbe7e4;
+    --eggshell: #f0efeb;
+    --powder-blue: #d6e2e9;
+    --sky-blue: #bcd4e6;
+    --blueberry: #99c1de;
+    --warm-cocoa: #7a2a3b;
+
+    --bg-color: var(--mint-soft);
+    --text-color: var(--warm-cocoa);
+    --button-bg: var(--blush-pink);
+    --button-hover: var(--rose-petal);
+    --button-border: var(--rose-beige);
+    --button-text: var(--warm-cocoa);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sour Gummy', sans-serif;
+}
+
+body.happy {
+    --bg-color: var(--peach-cream);
+    background-color: var(--bg-color);
+}
+
+body.neutral {
+    --bg-color: var(--mint-pale);
+    background-color: var(--bg-color);
+}
+
+body.sad {
+    --bg-color: var(--sky-blue);
+    background-color: var(--bg-color);
+}
+
+body.default {
+    --bg-color: var(--blush-pink);
+    background-color: var(--bg-color);
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+button {
+    background-color: var(--button-bg);
+    border: 0.05rem solid var(--button-border);
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--button-text);
+    margin: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+    color: var(--button-text);
+}
+
+button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button {
+        width: 100%;
+        max-width: 300px;
+    }
+}

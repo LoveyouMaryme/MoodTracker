@@ -2,17 +2,25 @@
     --mood-calendar-bg-color: #fae0e0;
     --mood-calendar-text-color: #4a4a4a;
     --mood-calendar-border-color: #ccc;
+    --mood-calendar-text-color-inactive: #ccc;
     --mood-calendar-highlight-color: #ffeb3b;
     --mood-calendar-today-color: #2196f3;
     --calendar-bg-color: #ffffff;
     --border: #000000;
-}
 
+    --font-xs: clamp(0.6rem, 1.2vw, 0.8rem);
+    --font-sm: clamp(0.75rem, 1.5vw, 1rem);
+    --font-md: clamp(1rem, 2vw, 1.25rem);
+    --font-lg: clamp(1.5rem, 3vw, 2rem);
+    --font-xl: clamp(2rem, 5vw, 2.5rem);
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Sour Gummy', sans-serif;
+    color: var(--mood-calendar-text-color);
 }
 
 body {
@@ -35,13 +43,7 @@ body {
     background-color: var(--calendar-bg-color);
     box-sizing: border-box;
     padding: 1rem;
-
-}
-
-.month-header,
-.weekdays .day-body {
-    padding: 0 1rem;
-
+    font-size: var(--font-sm);
 }
 
 .month-header {
@@ -51,11 +53,22 @@ body {
     max-width: 600px;
     justify-content: space-around;
     align-items: center;
-    margin: 20px 20px;
-
-
+    margin: 20px;
+    font-size: var(--font-md);
+    font-weight: bold;
 }
 
+.weekdays {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    gap: 0.25rem;
+    font-size: var(--font-sm);
+    font-weight: 600;
+}
 
 .day-body {
     display: flex;
@@ -65,20 +78,7 @@ body {
     justify-content: start;
     align-items: center;
     box-sizing: border-box;
-
 }
-
-.weekdays {
-    display: flex;
-    height: fit-content;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 10px;
-    width: 100%;
-    gap: 0.25rem;
-}
-
 
 .jour {
     display: grid;
@@ -91,21 +91,24 @@ body {
 }
 
 .day {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0;
-    min-width: 0;
-    border: 1px solid var(--border);
-    box-sizing: border-box;
     text-align: center;
-
+    font-size: var(--font-xs);
+    padding: 0.3rem 0.2rem;
+    word-break: break-word;
 }
 
-.journee {
-    border: 1px solid var(--border);
+.journee-inactive,
+.journee-active {
+    text-align: center;
+    font-size: var(--font-xs);
 }
 
-.journee div {
+.journee-inactive {
+    color: var(--mood-calendar-text-color-inactive)
+}
+
+.journee-inactive div,
+.journee-active div {
     box-sizing: border-box;
 }
 
@@ -129,7 +132,7 @@ body {
     }
 
     .day {
-        font-size: 0.7rem;
+        font-size: var(--font-xs);
         padding: 0.25rem;
     }
 }

@@ -50,18 +50,18 @@ async function updateMonth(state) {
         if (i < firstWeekdayIndex) {
             // Previous month
             const prevMonthDate = new Date(today.getFullYear(), today.getMonth(), 0);
-            DAY_ELEMENT.className = 'journee inactive';
+            DAY_ELEMENT.className = 'journee-inactive';
             DAY_ELEMENT.textContent = prevMonthDate.getDate() - (firstWeekdayIndex - i - 1);
         } else if (i >= lastDate + firstWeekdayIndex) {
             // Next month
-            DAY_ELEMENT.className = 'journee inactive';
+            DAY_ELEMENT.className = 'journee-inactive';
             DAY_ELEMENT.textContent = i - lastDate - firstWeekdayIndex + 1;
         } else {
             // Current month
             const dayOfMonth = i - firstWeekdayIndex + 1;
-            DAY_ELEMENT.className = 'journee active';
+            DAY_ELEMENT.className = 'journee-active';
             DAY_ELEMENT.dataset.date = fullDate.toISOString().split('T')[0];
-            DAY_ELEMENT.textContent = dayOfMonth;
+            DAY_ELEMENT.innerHTML = dayOfMonth;
 
             // Collect mood request and element
             dayElements.push(DAY_ELEMENT);
@@ -95,6 +95,7 @@ async function updateMonth(state) {
                 el.style.backgroundSize = 'contain';
                 el.style.backgroundPosition = 'center';
                 el.style.backgroundRepeat = 'no-repeat';
+                el.innerHTML = '';
             }
         });
     }

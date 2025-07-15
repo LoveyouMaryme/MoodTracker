@@ -4,16 +4,29 @@
 
 
 {% block content %}
-<h1>Thank you for sharing your mood!</h1>
-<p>Your mood today is: {{ mood }}
-    <button>
-        <a href="{{ url_for('index') }}">Home Page</a>
-    </button>
-    <button>
-        <a href="{{ url_for('show_mood_calendar')}}">Look at your Mood Calendar</a>
-    </button>
-    <button>
-        <a href="{{ url_for('get_mood_list')}}">View Mood History</a>
-    </button>
-</p>
+
+<h1>
+    {% if mood == "happy" %}
+
+    Awwwww, I'M SO HAPPY FOR YOU
+
+    {% elif mood == "neutral" %}
+    A win is a win
+
+    {% else %}
+
+    Those days never last. You will be okay, chin up
+
+    {% endif %}
+</h1>
+
+<button>
+    <a href="{{ url_for('index') }}">Home Page</a>
+</button>
+<button>
+    <a href="{{ url_for('show_mood_calendar')}}">Look at your Mood Calendar</a>
+</button>
+<button>
+    <a href="{{ url_for('get_mood_list')}}">View Mood History</a>
+</button>
 {% endblock %}

@@ -14,7 +14,7 @@
     {% endblock %}
 </head>
 
-<body>
+<body class="{{ mood | default('')}}">
     {% block content %}{% endblock %}
 </body>
 
