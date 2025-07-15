@@ -38,8 +38,8 @@ async function updateMonth(state) {
     document.querySelector('.jour').innerHTML = "";
 
     const dayElements = [];
-    const moodPromises = []
-    moodPromises.push(getMoodForDay(firstDayOfMonth));
+    const moodPromises = [];
+    moodPromises.push(getMoodForMonth(firstDayOfMonth));
 
 
     for (let i = 0; i <= 41; i++) {
@@ -69,32 +69,39 @@ async function updateMonth(state) {
         }
 
         document.querySelector('.jour').appendChild(DAY_ELEMENT);
+
     }
 
+    update_calendar_moods();
 
 
 
-    // Once all moods are loaded, update elements
-    const moodResults = await Promise.all(moodPromises);
-
-    console.log(moodResults)
-    moodResults.forEach((mood, idx) => {
-        const date = mood[idx].date.split(" ")[0]
-        const element_date = date.split("-")[2]
-        const el = dayElements[element_date - 1];
-        const mood_per_day = mood[idx].mood
+    async function update_calendar_moods() {
+        // Once all moods are loaded, update elements
+        const moodResults = await Promise.all(moodPromises);
 
 
-        if (mood) {
-            el.style.backgroundImage = `url('/static/images/${mood_per_day}.png')`;
-            el.style.backgroundSize = 'contain';
-            el.style.backgroundPosition = 'center';
-            el.style.backgroundRepeat = 'no-repeat';
-        }
-    });
+        moodResults[0].forEach((mood) => {
+
+
+            const date = mood.date.split(" ")[0]
+            const element_date = date.split("-")[2]
+            const el = dayElements[element_date - 1];
+            const mood_per_day = mood.mood
+
+
+            if (mood) {
+                el.style.backgroundImage = `url('/static/images/${mood_per_day}.png')`;
+                el.style.backgroundSize = 'contain';
+                el.style.backgroundPosition = 'center';
+                el.style.backgroundRepeat = 'no-repeat';
+            }
+        });
+    }
 }
 
-async function getMoodForDay(day) {
+
+async function getMoodForMonth(day) {
     const formattedDate = day.toISOString().split('T')[0];
     const month = formattedDate.split('-')[1];
     const year = formattedDate.split('-')[0];
