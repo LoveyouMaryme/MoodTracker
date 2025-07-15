@@ -7,6 +7,7 @@
     --mood-calendar-today-color: #2196f3;
     --calendar-bg-color: #ffffff;
     --border: #000000;
+    --text-area-border: #4a4a4a;
 
     --font-xs: clamp(0.6rem, 1.2vw, 0.8rem);
     --font-sm: clamp(0.75rem, 1.5vw, 1rem);
@@ -32,6 +33,12 @@ body {
     border: 1px solid var(--mood-calendar-border-color);
 }
 
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
 .calendar {
     display: flex;
     flex-direction: column;
@@ -49,9 +56,8 @@ body {
 .month-header {
     display: flex;
     flex-direction: row;
-    width: 80%;
-    max-width: 600px;
-    justify-content: space-around;
+    width: 100%;
+    justify-content: space-evenly;
     align-items: center;
     margin: 20px;
     font-size: var(--font-md);
@@ -110,6 +116,41 @@ body {
 .journee-inactive div,
 .journee-active div {
     box-sizing: border-box;
+}
+
+.notes-container {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    height: 50vh;
+    gap: 1rem;
+    justify-content: start;
+    align-items: center;
+    border-radius: 2rem;
+    background-color: var(--calendar-bg-color);
+    box-sizing: border-box;
+    padding: 1rem;
+    font-size: var(--font-sm);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+}
+
+
+textarea {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--button-border);
+    color: var(--warm-cocoa);
+    resize: none;
+    outline: 0.5px solid var(--text-area-border);
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--rose-petal);
 }
 
 @media (max-width: 1200px) {

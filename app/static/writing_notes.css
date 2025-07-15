@@ -1,0 +1,92 @@
+:root {
+    --rose-beige: #eddcd2;
+    --peach-cream: #fff1e6;
+    --blush-pink: #fde2e4;
+    --rose-petal: #fad2e1;
+    --mint-pale: #c5dedd;
+
+    --mint-soft: #dbe7e4;
+    --eggshell: #f0efeb;
+    --powder-blue: #d6e2e9;
+    --sky-blue: #bcd4e6;
+    --blueberry: #99c1de;
+    --warm-cocoa: #7a2a3b;
+
+    --bg-color: var(--mint-soft);
+    --text-color: var(--warm-cocoa);
+    --button-bg: var(--blush-pink);
+    --button-hover: var(--rose-petal);
+    --button-border: var(--rose-beige);
+    --button-text: var(--warm-cocoa);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sour Gummy', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #bcd4e6;
+}
+
+
+
+.note-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    height: 50vh;
+    background-color: var(--eggshell);
+    border-radius: 2rem;
+    gap: 2rem;
+
+}
+
+form {
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+textarea {
+    resize: none;
+    height: 80%;
+    width: 100%;
+    background-color: var(--eggshell);
+    border: none;
+}
+
+button {
+    border-radius: 2rem;
+    width: 30%;
+    background-color: var(--button-bg);
+    border: 0.05rem solid var(--button-border);
+    color: var(--button-text);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+
+button:hover {
+    background-color: var(--warm-cocoa);
+    color: var(--button-bg);
+}
+
+
+@media (max-width: 600px) {}

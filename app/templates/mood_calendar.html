@@ -9,6 +9,9 @@
 <div class="container">
     <div class="calendar">
         <div class="month-header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{url_for('static', filename='images/icons/home.png')}}" alt="">
+            </a>
             <div class="arrow-previous">
                 <img src="{{url_for('static', filename='images/icons/left-arrow.png')}}" alt="next-month">
             </div>
@@ -17,7 +20,13 @@
             </div>
             <div class="arrow-next">
                 <img src="{{url_for('static', filename='images/icons/right-arrow.png')}}" alt="next-month">
+
             </div>
+            <a href="{{url_for('show_mood_calendar')}}">
+                <span>
+                    Today
+                </span>
+            </a>
         </div>
         <div class="day-body">
             <div class="weekdays">
@@ -29,9 +38,40 @@
                 <div data-short="Fri" data-long="Friday" class="day">Friday</div>
                 <div data-short="Sat" data-long="Saturday" class="day">Saturday</div>
             </div>
-            <div class="jour">
+            <div class="jour"></div>
+
+
+        </div>
+
+    </div>
+    <div class="notes-container">
+        <h2>Yap yap gallery</h2>
+        <div class="notes-section">
+            {% for note in notes%}
+            <div class="note-header">
+                <h3 class="note-title">
+                    {{note.title}}
+                </h3>
+                <span class="note-date">
+                    {{note.date}}
+                </span>
 
             </div>
+            <div clas="note-content">
+                {{ note.content}}
+            </div>
+            {% endfor %}
+
+            <form action="">
+                <button>Add a Note</button>
+            </form>
+
+
+
+        </div>
+
+
+        <div class="notes-section">
 
 
         </div>

@@ -75,7 +75,6 @@ def get_all_moods_of_Month():
     # 
     monthMood = db.session.query(ranked_moods).filter(ranked_moods.c.rnk == 1).order_by(ranked_moods.c.date.desc()).all()
 
-    print(monthMood)
     
     mood_list = [
         {
@@ -88,3 +87,39 @@ def get_all_moods_of_Month():
         return jsonify(mood_list)
     else:
         return jsonify({"mood": None, "date": None})
+    
+@app.route('/write-note')
+def write_note():
+    return  render_template("write-notes.html")
+    
+
+@app.route('/confirmation_register_note', methods=["GET", "POST"])
+def register_note():
+
+    if request.method == "POST":
+        note_title = request.form.get('title')
+        note_content = request.form.get('note-contain')
+        mood = request.form.get('mood')
+
+        if note_title and note_content:
+            session['note'] = note_content
+            currentNote = Note(
+                title=note_title,
+                content=note_content,
+
+                date=datetime.now()
+            )
+        if mood:
+            currentNote.mood_id = mood
+            db.session.add(currentNote)
+            db.session.commit()
+
+            return redirect(url_for('confirmation_register_note'))
+        else:
+            return redirect(url_for('error_register_note')) 
+    
+    return url_for('write_note')
+ 
+
+
+
