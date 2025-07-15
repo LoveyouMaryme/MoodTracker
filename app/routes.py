@@ -3,6 +3,7 @@ from flask import render_template, request, redirect, url_for, session, jsonify
 from app.models import Note, Mood
 from app.routes import app
 from sqlalchemy.sql import func
+from datetime import datetime
 
 
 
@@ -15,7 +16,8 @@ def index():
         if mood:
             session['mood'] = mood
             currentMood = Mood(
-            mood=mood
+            mood=mood,
+            date=datetime.now()
             )
             db.session.add(currentMood)
             db.session.commit()

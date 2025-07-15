@@ -17,4 +17,4 @@ class Mood(db.Model):
     notes = db.relationship('Note', backref='mood', lazy=True)
 
     def __repr__(self):
-        return f'<Mood {self.mood} on {self.date}>'
+        return f'<Mood number {self.id}; {self.mood} on {self.date}>'
