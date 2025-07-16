@@ -2,16 +2,14 @@ const clickToSubmit = (name) => {
   const allElements = document.getElementsByName(name);
 
   Array.from(allElements).forEach((el) => {
-    el.addEventListener("click", async () => {
+    el.addEventListener("animationend", async () => {
       const form = el.closest("form");
       if (form) form.submit();
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      window.location.href = redirectUrl;
+      redirection();
     });
   });
 };
-const redirection = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 250));
+const redirection = () => {
   window.location.href = redirectUrl;
 };
 
