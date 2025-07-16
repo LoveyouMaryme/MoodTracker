@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %} Mood Calendar {% endblock %} {%
-block css_file %}
+{% extends "base.html" %} {% block title %} Mood Calendar {% endblock %} {%block
+css_file %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='index_style.css') }}"
@@ -46,12 +46,12 @@ block css_file %}
       Pick up your pen
     </button>
   </div>
-  <script>
-    const redirectUrl = "{{ url_for('thank_you') }}";
-  </script>
-  {% block scripts %}¸
-
-  <script src="{{ url_for('static', filename='index.js') }}"></script>
-  {% endblock %}
 </form>
+
+{% endblock %} {% block scripts %}¸
+<script>
+  const redirectUrl = "{{ url_for('thank_you') }}";
+</script>
+<script src="{{ url_for('static', filename='index.js') }}"></script>
+
 {% endblock %}

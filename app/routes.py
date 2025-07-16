@@ -13,6 +13,7 @@ app.secret_key = 'your_secret_key_here'  # Set a secret key for session manageme
 def index():
     if request.method == 'POST':
         mood = request.form.get('mood')
+        print(mood)
         if mood:
             session['mood'] = mood
             currentMood = Mood(
@@ -35,6 +36,7 @@ def show_mood_calendar():
 @app.route('/thank_you')
 def thank_you():
     mood = session.get('mood')
+    print(mood)
     return render_template('display_mood.html', mood=mood)
 
 
