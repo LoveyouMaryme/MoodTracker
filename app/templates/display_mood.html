@@ -1,38 +1,23 @@
-{% extends "base.html" %}
-{% block title %} Mood Response {% endblock %}
-
-
-
-{% block content %}
+{% extends "base.html" %} {% block title %} Mood Response {% endblock %} {%
+block content %}
 
 <h1>
-    {% if mood == "happy" %}
-
-    Awwwww, I'M SO HAPPY FOR YOU
-
-    {% elif mood == "neutral" %}
-    A win is a win
-
-    {% else %}
-
-    Those days never last. You will be okay, chin up
-
-    {% endif %}
+  {% if mood == "happy" %} Awwwww, I'M SO HAPPY FOR YOU {% elif mood ==
+  "neutral" %} A win is a win {% else %} Those days never last. You will be
+  okay, chin up {% endif %}
 </h1>
 
 <button>
-    <a href="{{ url_for('index') }}">Home Page</a>
+  <a href="{{ url_for('index') }}">Home Page</a>
 </button>
 <button>
-    <a href="{{ url_for('show_mood_calendar')}}">Look at your Mood Calendar</a>
+  <a href="{{ url_for('show_mood_calendar')}}">Look at your Mood Calendar</a>
 </button>
 <button>
-    <a href="{{ url_for('get_mood_list')}}">View Mood History</a>
+  <a href="{{ url_for('get_mood_list')}}">View Mood History</a>
 </button>
 <button>
-    <a href="{{url_for('write_note')}}">Write your thoughts</a>
+  <a href="{{url_for('write_note')}}">Write your thoughts</a>
 </button>
-
-<button></button>
 
 {% endblock %}
