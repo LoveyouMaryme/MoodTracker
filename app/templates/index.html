@@ -1,42 +1,58 @@
-{% extends "base.html" %}
-
-{% block title %} Mood Calendar {% endblock %}
-
-{% block css_file %}
-<link rel="stylesheet" href="{{ url_for('static', filename='index_style.css') }}">
-{% endblock %}
-
-
-
-{% block content %}
+{% extends "base.html" %} {% block title %} Mood Calendar {% endblock %} {%
+block css_file %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='index_style.css') }}"
+/>
+{% endblock %} {% block content %}
 <h1>How do you feel today {{name}}?</h1>
-<form action="{{ url_for('index')}}" name='pick-mood' method="POST">
-    <div class="mood-options">
-        <label class="mood-option">
-            <input type="radio" name="mood" value="happy" required>
-            <img src="{{ url_for('static', filename='images/happy.png') }}" alt="Happy">
-        </label>
-        <label class="mood-option">
-            <input type="radio" name="mood" value="neutral" required>
-            <img src="{{ url_for('static', filename='images/neutral.png') }}" alt="Neutral">
-        </label>
-        <label class="mood-option">
-            <input type="radio" name="mood" value="sad" required>
-            <img src="{{ url_for('static', filename='images/sad.png') }}" alt="Sad">
-        </label>
+<form action="{{ url_for('index')}}" name="pick-mood" method="POST">
+  <div class="mood-options">
+    <label class="mood-option">
+      <input type="radio" name="mood" value="happy" required />
+      <img
+        src="{{ url_for('static', filename='images/happy.png') }}"
+        alt="Happy"
+      />
+    </label>
+    <label class="mood-option">
+      <input type="radio" name="mood" value="neutral" required />
+      <img
+        src="{{ url_for('static', filename='images/neutral.png') }}"
+        alt="Neutral"
+      />
+    </label>
+    <label class="mood-option">
+      <input type="radio" name="mood" value="sad" required />
+      <img src="{{ url_for('static', filename='images/sad.png') }}" alt="Sad" />
+    </label>
+  </div>
+  <div class="button-container">
+    <button type="submit" id="submit-button">Submit</button>
+    <button
+      type="submit"
+      formaction="{{ url_for('show_mood_calendar')}}"
+      formmethod="get"
+      formnovalidate
+      id="view-history-button"
+    >
+      View History
+    </button>
+    <button
+      type="submit"
+      formaction="{{url_for('write_note')}}"
+      formmethod="get"
+      formnovalidate
+    >
+      Pick up your pen
+    </button>
+  </div>
+  <script>
+    const redirectUrl = "{{ url_for('thank_you') }}";
+  </script>
+  {% block scripts %}¸
 
-    </div>
-    <div class="button-container">
-        <button type="submit" id="submit-button">Submit</button>
-        <button type="submit" formaction="{{ url_for('show_mood_calendar')}}" formmethod="get" formnovalidate
-            id="view-history-button">
-            View History
-        </button>
-        <button type="submit" formaction="{{url_for('write_note')}}" formmethod="get" formnovalidate>Pick up your
-            pen</button>
-
-    </div>
-
-
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+  {% endblock %}
 </form>
 {% endblock %}
