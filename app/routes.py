@@ -20,6 +20,7 @@ def index():
             mood=mood,
             date=datetime.now()
             )
+            print(f"this is {currentMood}")
             db.session.add(currentMood)
             db.session.commit()
             return redirect(url_for('thank_you'))

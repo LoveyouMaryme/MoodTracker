@@ -2,15 +2,16 @@ const clickToSubmit = (name) => {
   const allElements = document.getElementsByName(name);
 
   Array.from(allElements).forEach((el) => {
-    el.addEventListener("animationend", async () => {
+    console.log(el)
+
+    el.addEventListener("animationend", () => {
       const form = el.closest("form");
-      if (form) form.submit();
-      redirection();
+      form.submit();
+
     });
   });
 };
-const redirection = () => {
-  window.location.href = redirectUrl;
-};
+
 
 document.addEventListener("DOMContentLoaded", () => clickToSubmit("pick-mood"));
+

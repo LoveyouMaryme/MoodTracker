@@ -16,7 +16,7 @@ NEXT_BUTTON.addEventListener('click', () => updateMonth('next'));
 PREVIOUS_BUTTON.addEventListener('click', () => updateMonth('previous'));
 window.addEventListener('DOMContentLoaded', () => updateMonth('current'));
 
-async function updateMonth(state) {
+function updateMonth(state) {
     if (state === 'previous') {
         today.setMonth(today.getMonth() - 1);
     } else if (state === 'next') {
