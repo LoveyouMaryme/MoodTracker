@@ -4,6 +4,7 @@
     --blush-pink: #fde2e4;
     --rose-petal: #fad2e1;
     --mint-pale: #c5dedd;
+    --grey: #cccccc;
 
     --mint-soft: #dbe7e4;
     --eggshell: #f0efeb;
@@ -47,7 +48,7 @@ body {
     height: 50vh;
     background-color: var(--eggshell);
     border-radius: 2rem;
-    gap: 2rem;
+    gap: 1rem;
 
 }
 
@@ -56,7 +57,7 @@ form {
     width: 80%;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
 }
 
@@ -66,6 +67,34 @@ textarea {
     width: 100%;
     background-color: var(--eggshell);
     border: none;
+}
+
+.title-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+input[type='text'] {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 500;
+    box-sizing: border-box;
+    background-color: var(--eggshell);
+    border: none;
+
+
+}
+
+hr {
+    color: var(--grey)
+}
+
+label {
+    text-align: left;
 }
 
 button {
@@ -86,6 +115,12 @@ button {
 button:hover {
     background-color: var(--warm-cocoa);
     color: var(--button-bg);
+}
+
+
+.mood-options {
+    width: 10%;
+    height: auto;
 }
 
 

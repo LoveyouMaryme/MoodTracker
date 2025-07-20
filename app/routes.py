@@ -1,13 +1,12 @@
 from app import app, db
 from flask import render_template, request, redirect, url_for, session, jsonify
 from app.models import Note, Mood
-from app.routes import app
-from sqlalchemy.sql import func
+from sqlalchemy.sql import func, desc
 from datetime import datetime
 
 
 
-app.secret_key = 'your_secret_key_here'  # Set a secret key for session management
+app.secret_key = 'changing'  # Set a secret key for session management
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -61,8 +60,6 @@ def get_all_moods_of_Month():
     if not month or not year:
         return jsonify({"error": "Month or Year parameters are missing"}), 400
     
-
-
     #Get the last mood of the day
     ranked_moods = db.session.query(
         Mood,
@@ -96,12 +93,13 @@ def write_note():
     return  render_template("write-notes.html")
     
 
-@app.route('/confirmation_register_note', methods=["GET", "POST"])
+@app.route('/register_note', methods=["GET", "POST"])
 def register_note():
+
 
     if request.method == "POST":
         note_title = request.form.get('title')
-        note_content = request.form.get('note-contain')
+        note_content = request.form.get('note_content')
         mood = request.form.get('mood')
 
         if note_title and note_content:
@@ -109,11 +107,11 @@ def register_note():
             currentNote = Note(
                 title=note_title,
                 content=note_content,
-
                 date=datetime.now()
             )
-        if mood:
-            currentNote.mood_id = mood
+            if mood:
+                currentNote.mood_id = mood
+            
             db.session.add(currentNote)
             db.session.commit()
 
@@ -125,4 +123,42 @@ def register_note():
  
 
 
+@app.route('/error_register_note')
+def error_register_note():
+    return render_template("error_register_note.html")
 
+@app.route('/confirmation_register_note')
+def confirmation_register_note():
+    return render_template("confirmation_register_note.html")
+
+
+@app.route("/api/current_notes")
+def get_notes_of_day():
+    date = request.args.get('date')
+    print(date)
+
+    if not date:
+        return jsonify({"error": "Date parameter is missing"}), 400
+
+
+    daily_notes = db.session.query(
+        Note
+    ).filter(
+        func.date(Note.date) == func.date(date)
+    ).order_by(desc(Note.date)).all()
+
+    print(daily_notes)
+    
+    notes_list = [
+        {
+            "title": note.title,
+            "content": note.content,
+            "date": note.date.strftime('%Y-%m-%d %H:%m:%s')
+
+        } for note in daily_notes
+    ] 
+
+    if notes_list:
+        return jsonify(notes_list)
+    else:
+        return jsonify({"title": None, "date": None, "content": None})

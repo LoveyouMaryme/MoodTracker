@@ -46,37 +46,22 @@
     </div>
     <div class="notes-container">
         <h2>Yap yap gallery</h2>
-        <div class="notes-section">
-            {% for note in notes%}
-            <div class="note-header">
-                <h3 class="note-title">
-                    {{note.title}}
-                </h3>
-                <span class="note-date">
-                    {{note.date}}
-                </span>
-
-            </div>
-            <div clas="note-content">
-                {{ note.content}}
-            </div>
-            {% endfor %}
-
-            <form action="">
-                <button>Add a Note</button>
-            </form>
-
-
+        <div class="notes-section" id="notes-section">
 
         </div>
 
+        <form action="">
+            <button>Add a Note</button>
+        </form>
+    </div>
 
-        <div class="notes-section">
 
+    <div class="notes-section">
 
-        </div>
 
     </div>
+
+</div>
 
 </div>
 {% endblock %}

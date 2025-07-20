@@ -8,6 +8,7 @@ function updateWeekdayNames() {
 window.addEventListener('resize', updateWeekdayNames);
 window.addEventListener('DOMContentLoaded', updateWeekdayNames);
 
+
 const NEXT_BUTTON = document.querySelector('.arrow-next');
 const PREVIOUS_BUTTON = document.querySelector('.arrow-previous');
 var today = new Date();
@@ -102,12 +103,83 @@ function updateMonth(state) {
 }
 
 
+
+document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("journee-active")) {
+        const date = e.target.dataset.date;
+        const listOfNotes = await getNotesForDay(date);
+        const noteSection = document.querySelector('#notes-section');
+
+
+
+        // Apply scroll styles here
+        noteSection.style.maxHeight = "300px";
+        noteSection.style.overflowY = "auto";
+        noteSection.style.boxSizing = "border-box";
+
+        noteSection.innerHTML = '';
+
+        if (listOfNotes.length === undefined) {
+            const emptyNote = document.createElement('div');
+            emptyNote.className = 'note-empty';
+            emptyNote.textContent = 'No notes for this day 🐾';
+            noteSection.appendChild(emptyNote);
+
+        } else {
+
+
+
+            listOfNotes.forEach(note => {
+                const NOTE_ALL_ELEMENT = document.createElement('div');
+                NOTE_ALL_ELEMENT.className = 'note';
+
+                const NOTE_TOP_ELEMENT = document.createElement('div');
+                NOTE_TOP_ELEMENT.className = 'top-section-note';
+
+                const NOTE_TOP_TITLE = document.createElement('h1');
+                NOTE_TOP_TITLE.className = 'note-title';
+                NOTE_TOP_TITLE.textContent = note.title;
+
+                const NOTE_TOP_DATE = document.createElement('span');
+                NOTE_TOP_DATE.className = 'note-date';
+                NOTE_TOP_DATE.textContent = note.date;
+
+                const NOTE_BOTTOM_ELEMENT = document.createElement('div');
+                NOTE_BOTTOM_ELEMENT.className = 'note-content';
+                NOTE_BOTTOM_ELEMENT.textContent = note.content;
+
+                NOTE_TOP_ELEMENT.appendChild(NOTE_TOP_TITLE);
+                NOTE_TOP_ELEMENT.appendChild(NOTE_TOP_DATE);
+                NOTE_ALL_ELEMENT.appendChild(NOTE_TOP_ELEMENT);
+                NOTE_ALL_ELEMENT.appendChild(NOTE_BOTTOM_ELEMENT);
+
+                noteSection.appendChild(NOTE_ALL_ELEMENT);
+            });
+        }
+    }
+
+});
+
+
+
 async function getMoodForMonth(day) {
     const formattedDate = day.toISOString().split('T')[0];
     const month = formattedDate.split('-')[1];
     const year = formattedDate.split('-')[0];
     try {
         const response = await fetch(`/api/current_mood?month=${month}&year=${year}`);
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.error('Error fetching mood:', error);
+        return null;
+    }
+}
+
+
+async function getNotesForDay(date) {
+    try {
+        const response = await fetch(`/api/current_notes?date=${date}`);
         const data = await response.json();
         return data
     } catch (error) {

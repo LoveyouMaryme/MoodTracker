@@ -8,29 +8,16 @@
 {% block content %}
 <div class="note-container">
     <h1>Notes</h1>
-    <form action="{{ url_for('write_note') }}" method="post">
-        <textarea placeholder="Spill the tea Sis..."></textarea>
-        <div>
-            <div>
-                <button type="submit">Save Note</button>
-            </div>
-            <form action="{{ url_for('index')}}" name='pick-mood' method="POST">
-                <div class="mood-options">
-                    <label class="mood-option">
-                        <input type="radio" name="mood" value="happy" required>
-                        <img src="{{ url_for('static', filename='images/happy.png') }}" alt="Happy">
-                    </label>
-                    <label class="mood-option">
-                        <input type="radio" name="mood" value="neutral" required>
-                        <img src="{{ url_for('static', filename='images/neutral.png') }}" alt="Neutral">
-                    </label>
-                    <label class="mood-option">
-                        <input type="radio" name="mood" value="sad" required>
-                        <img src="{{ url_for('static', filename='images/sad.png') }}" alt="Sad">
-                    </label>
-                </div>
-            </form>
+    <form action="{{ url_for('register_note') }}" method="POST">
+        <div class="title-container">
+
+            <label for="Title: " aria-placeholder="TLDR" required>Title:</label>
+            <input type="text" name="title">
         </div>
+        <hr>
+        <textarea name="note_content" placeholder="Spill the tea Sis..." required></textarea>
+        <button type="submit">Save Note</button>
+    </form>
+</div>
 
-
-        {% endblock %}
+{% endblock %}
